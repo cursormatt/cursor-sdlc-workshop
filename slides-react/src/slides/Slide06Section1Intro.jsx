@@ -5,28 +5,36 @@ const Slide06Section1Intro = () => (
       <span className="phase-badge">Greenfield Project • 45 min • Teams of 5</span>
     </div>
     <h2>Build Something From Scratch</h2>
+    <div className="intro-callout cyan">
+      <p>
+        <strong>In this section</strong>, you'll experience the{' '}
+        <strong>complete software development lifecycle</strong> — from planning to
+        testing — while learning how Cursor can assist at each stage.
+      </p>
+      <p>
+        You'll also practice <strong>git workflow</strong> in a collaborative team
+        setting, just like real engineering teams do every day.
+      </p>
+    </div>
     <div className="two-col">
       <div>
-        <div className="key-points" style={{ gap: '0.75rem' }}>
-          <div className="key-point green">
-            <div className="key-point-icon">01</div>
-            <div className="key-point-text">
-              Experience the{' '}
-              <span className="highlight-green">complete SDLC</span>
+        <div className="tiles" style={{ gridTemplateColumns: '1fr', gap: '0.75rem' }}>
+          <div className="tile cyan">
+            <div className="tile-number">01</div>
+            <div className="tile-title">
+              Experience the <span className="highlight-green">complete SDLC</span>
             </div>
           </div>
-          <div className="key-point green">
-            <div className="key-point-icon">02</div>
-            <div className="key-point-text">
-              Learn how{' '}
-              <span className="highlight-green">Cursor assists at each stage</span>
+          <div className="tile cyan">
+            <div className="tile-number">02</div>
+            <div className="tile-title">
+              Learn how <span className="highlight-green">Cursor assists</span> at each stage
             </div>
           </div>
-          <div className="key-point green">
-            <div className="key-point-icon">03</div>
-            <div className="key-point-text">
-              Practice{' '}
-              <span className="highlight-green">git workflow</span>
+          <div className="tile cyan">
+            <div className="tile-number">03</div>
+            <div className="tile-title">
+              Practice <span className="highlight-green">git workflow</span>
             </div>
           </div>
         </div>

@@ -24,9 +24,9 @@ const Slide14Section2Step3 = () => (
           </div>
         </div>
 
-        {/* THE WORK */}
-        <div className="check-group work section2">
-          <div className="check-group-label">The Work</div>
+{/* IN CURSOR */}
+          <div className="check-group work section2">
+            <div className="check-group-label">In Cursor</div>
           <div className="check-item">
             <div className="check-box"></div>
             <div>

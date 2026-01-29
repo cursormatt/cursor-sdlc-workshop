@@ -35,6 +35,20 @@ const Slide12Section2Step1 = () => (
             for you automatically
           </div>
         </div>
+        <div className="check-item">
+          <div className="check-box"></div>
+          <div>
+            <strong>Use Plan Mode with multiple models</strong> — what do you notice
+            about the available models?
+          </div>
+        </div>
+        <div className="check-item">
+          <div className="check-box"></div>
+          <div>
+            <strong>Open project in web browser</strong> — ask Cursor to open your
+            webapp in a browser (Chrome extensions won't work in Cursor's browser)
+          </div>
+        </div>
       </div>
       <div className="emphasis-box orange">
         <strong>Tip:</strong> Ask Cursor how to set these up — figuring it out is

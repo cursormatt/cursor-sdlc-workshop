@@ -1,3 +1,5 @@
+import netflixScreenshot from '../assets/netflix_homepage.webp'
+
 const Slide17Transformation = () => (
   <>
     <div className="section-header">
@@ -5,26 +7,36 @@ const Slide17Transformation = () => (
       <span className="phase-badge">The Transformation</span>
     </div>
     <h2>Before → After</h2>
-    <div className="two-col">
-      <div>
+    <div className="transformation-compare">
+      <div className="transformation-panel">
         <h3 style={{ color: 'var(--red)' }}>😬 You Start With</h3>
-        <ul style={{ listStyle: 'none', fontSize: '1.2rem', lineHeight: 2 }}>
-          <li>• Times New Roman font</li>
-          <li>• HTML table with border="1"</li>
-          <li>• Gray "[no image]" boxes</li>
-          <li>• Zero CSS</li>
-          <li>• "Here are some movies"</li>
-        </ul>
+        <div className="ugly-site">
+          <h1>Netflix</h1>
+          <hr />
+          <p>Welcome to Netflix. Here are some movies you can watch:</p>
+          <ul>
+            <li><a href="#">The Shawshank Redemption</a> - Drama (1994)</li>
+            <li><a href="#">The Dark Knight</a> - Action (2008)</li>
+            <li><a href="#">Inception</a> - Sci-Fi (2010)</li>
+            <li><a href="#">Pulp Fiction</a> - Crime (1994)</li>
+            <li><a href="#">Forrest Gump</a> - Drama (1994)</li>
+          </ul>
+          <p>TV Shows:</p>
+          <ul>
+            <li><a href="#">Breaking Bad</a></li>
+            <li><a href="#">Stranger Things</a></li>
+            <li><a href="#">The Crown</a></li>
+          </ul>
+          <hr />
+          <p><a href="#">Sign in</a> | <a href="#">Create account</a></p>
+          <div className="ugly-counter">Page views: 12,847</div>
+        </div>
       </div>
-      <div>
+      <div className="transformation-panel">
         <h3 style={{ color: 'var(--green)' }}>🎉 You Build</h3>
-        <ul style={{ listStyle: 'none', fontSize: '1.2rem', lineHeight: 2 }}>
-          <li>• Netflix dark theme</li>
-          <li>• Card grid with hover effects</li>
-          <li>• Real movie posters</li>
-          <li>• Hero banner, categories</li>
-          <li>• Search, My List, profiles</li>
-        </ul>
+        <div className="nice-site">
+          <img src={netflixScreenshot} alt="Netflix homepage" />
+        </div>
       </div>
     </div>
   </>

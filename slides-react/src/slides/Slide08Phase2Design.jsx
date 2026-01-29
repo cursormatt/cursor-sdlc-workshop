@@ -43,14 +43,14 @@ const Slide08Phase2Design = () => (
           </div>
         </div>
 
-        {/* THE WORK */}
-        <div className="check-group work section1">
-          <div className="check-group-label">The Work</div>
+{/* IN CURSOR */}
+          <div className="check-group work section1">
+            <div className="check-group-label">In Cursor</div>
           <div className="check-item">
             <div className="check-box"></div>
             <div>
-              <strong>ONE PERSON:</strong> Create the base MVP application using
-              Cursor
+              <strong>ONE PERSON:</strong> Create the base MVP application from{' '}
+              <span className="highlight">prd.md</span> using Cursor
             </div>
           </div>
           <div className="check-item">

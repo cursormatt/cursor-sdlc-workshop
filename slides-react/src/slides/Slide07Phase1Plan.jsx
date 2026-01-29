@@ -40,9 +40,9 @@ const Slide07Phase1Plan = () => (
           </div>
         </div>
 
-        {/* THE WORK */}
+        {/* IN CURSOR */}
         <div className="check-group work section1">
-          <div className="check-group-label">The Work</div>
+          <div className="check-group-label">In Cursor</div>
           <div className="check-item has-code">
             <div className="check-header">
               <div className="check-box"></div>
