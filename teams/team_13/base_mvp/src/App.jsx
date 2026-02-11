@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { TEAMS } from './data/teams.js'
+import WinPercentDisplay from './components/WinPercentDisplay.jsx'
 import './App.css'
 
 export default function App() {
@@ -28,12 +29,7 @@ export default function App() {
         ))}
       </select>
 
-      <div className="result">
-        <span className="result-value">{selectedTeam.winPercent}%</span>
-        <span className="result-label">
-          {selectedTeam.name}'s chance of winning the World Cup
-        </span>
-      </div>
+      <WinPercentDisplay team={selectedTeam} />
     </div>
   )
 }
