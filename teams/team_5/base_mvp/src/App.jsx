@@ -3,10 +3,13 @@ import './App.css'
 
 // Fixed passage for the base MVP — teammates can add difficulty levels later
 const PASSAGE = 'The quick brown fox jumps over the lazy dog.'
+const CHARS_PER_WORD = 5
 
 function App() {
   const [typed, setTyped] = useState('')
   const [isComplete, setIsComplete] = useState(false)
+  const [wpm, setWpm] = useState(0)
+  const startTimeRef = useRef(null)
   const inputRef = useRef(null)
 
   // Compare typed vs passage and detect completion
@@ -14,6 +17,19 @@ function App() {
     if (typed === PASSAGE) {
       setIsComplete(true)
     }
+  }, [typed])
+
+  // WPM: words per minute (standard = 5 chars per word)
+  useEffect(() => {
+    if (typed.length === 0) return
+    if (!startTimeRef.current) {
+      startTimeRef.current = Date.now()
+    }
+    const elapsedMs = Date.now() - startTimeRef.current
+    const elapsedMinutes = elapsedMs / (1000 * 60)
+    const words = typed.length / CHARS_PER_WORD
+    const currentWpm = elapsedMinutes > 0 ? Math.round(words / elapsedMinutes) : 0
+    setWpm(currentWpm)
   }, [typed])
 
   const handleChange = (e) => {
@@ -24,6 +40,11 @@ function App() {
     <div className="app">
       <h1>Speed Typing Game</h1>
       <p className="subtitle">Type the passage below as fast as you can.</p>
+
+      {/* WPM Display — updates in real time as user types */}
+      <div className="stats-bar">
+        <span className="wpm-display">WPM: {wpm}</span>
+      </div>
 
       {/* Passage with character-by-character feedback */}
       <div className="passage" aria-label="Text to type">
