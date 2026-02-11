@@ -59,18 +59,12 @@
 
 | Name | Task | Description |
 |------|------|-------------|
-| _TBD_ | Review Section | Add a review list and submission form with star ratings for each market (`src/components/ReviewSection.jsx`) |
-| _TBD_ | Photo Gallery | Add a photo grid with lightbox modal overlay for each market (`src/components/PhotoGallery.jsx`) |
-| _TBD_ | Vendor Directory | Add an accordion-style expandable/collapsible vendor list for each market (`src/components/VendorList.jsx`) |
-| _TBD_ | Search & Filter Bar | Add a text search input and day-of-week/category filter buttons to the market list (`src/components/SearchFilter.jsx`) |
-| _TBD_ | Favorites & Ratings Summary | Add a heart/favorite toggle and "My Favorites" section with average rating badges (`src/components/Favorites.jsx`) |
-| Name  | Task               | Description                                                                 |
-|-------|--------------------|-----------------------------------------------------------------------------|
-| Joe   | Progress tracker   | Shows how many stages are "complete" (e.g. 2/6) with a simple progress bar  |
-| David | Stage descriptions | Expandable or hover text for each stage with a short Cursor tip             |
-| Sam   | Timer              | Elapsed time since "starting" the board (or a countdown)                    |
-| Alex  | Theme toggle       | Switch between light and dark (or Cursor-style blue) theme                  |
-| Chris | What's next        | Highlights the "current" stage and shows a short call-to-action tip         |
+| Person 1 (MVP builder) | Base Game | Build the base game: 3x3 grid, moles pop up randomly, click to score, 30-second round |
+| Person 2 | Scoreboard | Display current score, track high score in localStorage, show "New High Score!" message |
+| Person 3 | Difficulty Settings | Slider or buttons to change mole speed (easy/medium/hard), persist choice |
+| Person 4 | Sound Effects | Whack sound on hit, miss sound on click-empty, round-start/round-end sounds |
+| Person 5 | Timer and Round Display | Countdown bar, round number, "Game Over" screen with stats |
+| Person 6 | Animations | Mole pop-up/pop-down CSS transitions, shake on miss, confetti on new high score |
 
 ### Task Guidelines
 - Each task should add something **visible** to the project
@@ -85,32 +79,19 @@
 > **One person** creates the foundation that everyone else builds on.
 
 **What the MVP includes:**
-- A `src/data.js` file with an array of 4–5 hardcoded farmers' markets (name, location, hours, day of week, short description)
-- An `App.jsx` with a header ("FreshFind") and a grid of simple market cards
-- Clicking a card sets state to show that market's detail panel (conditional rendering, not a router)
-- Basic CSS (`App.css`) for a clean card layout
-- Scaffolded with `npm create vite@latest -- --template react`
+- 3x3 grid of "holes"
+- Moles appear in random holes every ~800ms
+- Click a mole to score +1
+- Basic score counter at the top
+- 30-second game timer
+- Scaffolded with Vite (`npm create vite@latest -- --template react`)
 
 **What it does NOT include:**
-- Reviews
-- Photos / photo gallery
-- Vendor lists
-- Search and filtering
-- Favorites / rating badges
-
-These are the 5 features left for team members to build independently.
-- Single-page React app (Vite + React)
-- Six stage cards in a row: **Plan**, **Design**, **Develop**, **Test**, **Review**, **Deploy**
-- Each card shows the stage name and a one-line description (e.g. "Define requirements, break down tasks")
-- Minimal styling: readable layout, one color accent (e.g. Cursor blue)
-- No backend, no auth — all state in React or localStorage if needed
-
-**What it does NOT include:**
-- Progress bar or "stages complete" counter (Joe)
-- Rich/expandable descriptions or Cursor tips per stage (David)
-- Timer or countdown (Sam)
-- Theme/color toggle (Alex)
-- "Current stage" highlight or "what's next" call-to-action (Chris)
+- No high score tracking (Scoreboard feature)
+- No difficulty options (Difficulty Settings feature)
+- No audio (Sound Effects feature)
+- No fancy timer UI or game-over screen (Timer feature)
+- No CSS animations or confetti (Animations feature)
 
 ---
 
@@ -118,76 +99,30 @@ These are the 5 features left for team members to build independently.
 
 > These are the features team members will add. Design them to be **independent** so people can work in parallel.
 
-### Feature 1: Review Section
-- **Assigned to:** _TBD_
-- **Description:** Displays a list of hardcoded sample reviews for each market, plus a form to add a new review (text input + star rating). New reviews are stored in `useState`. Shows reviewer name (text field), comment, and star rating. Sample review data can be added to the market objects in `data.js` or kept inside the component.
-- **Files to modify/create:** `src/components/ReviewSection.jsx`, `src/components/ReviewSection.css`
+### Feature 1: Scoreboard
+- **Assigned to:** Person 2
+- **Description:** Display the current score prominently, track the all-time high score in localStorage, and show a "New High Score!" message when the player beats it.
+- **Files to modify/create:** `src/components/Scoreboard.jsx`
 
-### Feature 2: Photo Gallery
-- **Assigned to:** _TBD_
-- **Description:** Displays a grid of market photos (hardcoded placeholder image URLs or Unsplash links). Clicking a photo opens a simple lightbox/modal overlay. Includes a caption for each photo. Photo data (url + caption) can be added to each market in `data.js` or hardcoded within the component.
-- **Files to modify/create:** `src/components/PhotoGallery.jsx`, `src/components/PhotoGallery.css`
+### Feature 2: Difficulty Settings
+- **Assigned to:** Person 3
+- **Description:** Add a slider or button group to change mole speed (easy/medium/hard). Persist the chosen difficulty so it survives a page refresh.
+- **Files to modify/create:** `src/components/Settings.jsx`
 
-### Feature 3: Vendor Directory
-- **Assigned to:** _TBD_
-- **Description:** Shows an expandable/collapsible accordion-style list of vendors for each market. Each vendor has a name, category (produce, baked goods, crafts, etc.), and a short description. Uses `useState` for expand/collapse toggling. Vendor data can be added to each market in `data.js`.
-- **Files to modify/create:** `src/components/VendorList.jsx`, `src/components/VendorList.css`
+### Feature 3: Sound Effects
+- **Assigned to:** Person 4
+- **Description:** Play a whack sound on hit, a miss sound when clicking an empty hole, and round-start/round-end sounds.
+- **Files to modify/create:** `src/components/SoundEffects.jsx`, `src/data/sounds/`
 
-### Feature 4: Search & Filter Bar
-- **Assigned to:** _TBD_
-- **Description:** A bar at the top of the market list with a text search input (filters market cards by name) and category/day-of-week filter buttons. Calls a filter callback passed as a prop (`onFilter`) from `App.jsx`. The component itself is self-contained; the only touch point with App is the filter prop.
-- **Files to modify/create:** `src/components/SearchFilter.jsx`, `src/components/SearchFilter.css`
+### Feature 4: Timer and Round Display
+- **Assigned to:** Person 5
+- **Description:** Replace the basic timer with a visual countdown bar, add a round number, and show a "Game Over" screen with stats (score, accuracy, time).
+- **Files to modify/create:** `src/components/Timer.jsx`
 
-### Feature 5: Favorites & Ratings Summary
-- **Assigned to:** _TBD_
-- **Description:** Adds a heart/favorite toggle button to each market card and a "My Favorites" sidebar or section that lists favorited markets. Favorites stored in `useState` (or `localStorage` for persistence across refresh). Shows an average star rating badge on each card. Renders alongside the card grid in App and receives the market list as a prop.
-- **Files to modify/create:** `src/components/Favorites.jsx`, `src/components/Favorites.css`
-
----
-
-## Architecture
-
-```
-src/
-  data.js                    -- hardcoded market data (shared)
-  App.jsx                    -- MVP: header, card grid, detail view
-  App.css                    -- base styles
-  components/
-    ReviewSection.jsx        -- Feature 1
-    ReviewSection.css
-    PhotoGallery.jsx         -- Feature 2
-    PhotoGallery.css
-    VendorList.jsx           -- Feature 3
-    VendorList.css
-    SearchFilter.jsx         -- Feature 4
-    SearchFilter.css
-    Favorites.jsx            -- Feature 5
-    Favorites.css
-```
-### Feature 1: Progress tracker
-- **Assigned to:** Joe
-- **Description:** A component that displays "X/6 stages" and a progress bar. Stages can be marked complete (e.g. click to toggle) — state in React or localStorage.
-- **Files to modify/create:** New component e.g. `src/components/ProgressTracker.jsx`; add it to `App.jsx`.
-
-### Feature 2: Stage descriptions
-- **Assigned to:** David
-- **Description:** Each stage card shows a short Cursor tip (e.g. "Plan Mode, multi-model reasoning" for Plan). Can be expand/collapse or hover tooltip — one component or a small description module.
-- **Files to modify/create:** New component e.g. `src/components/StageDescriptions.jsx` or extend the stage card component; optional `src/data/stageTips.js` for the copy.
-
-### Feature 3: Timer
-- **Assigned to:** Sam
-- **Description:** Displays elapsed time since the user "started" (e.g. since page load or since clicking Start). Simple MM:SS display.
-- **Files to modify/create:** New component e.g. `src/components/Timer.jsx`; add it to `App.jsx`.
-
-### Feature 4: Theme toggle
-- **Assigned to:** Alex
-- **Description:** A control (button or toggle) to switch between two themes — e.g. light vs dark, or default vs Cursor-blue. Use CSS variables or a theme class on a wrapper.
-- **Files to modify/create:** New component e.g. `src/components/ThemeToggle.jsx`; add theme styles (e.g. in `App.css` or a small `themes.css`); add to `App.jsx`.
-
-### Feature 5: What's next
-- **Assigned to:** Chris
-- **Description:** Highlights the "current" stage (e.g. first incomplete, or user-selectable) and shows a short call-to-action (e.g. "Next: Design — sketch your components").
-- **Files to modify/create:** New component e.g. `src/components/WhatsNext.jsx`; add it to `App.jsx`. May read "current stage" from shared state or props if the team adds it.
+### Feature 5: Animations
+- **Assigned to:** Person 6
+- **Description:** Add CSS transitions for mole pop-up/pop-down, a shake effect on miss, and confetti when the player sets a new high score.
+- **Files to modify/create:** `src/components/Animations.jsx`
 
 ---
 

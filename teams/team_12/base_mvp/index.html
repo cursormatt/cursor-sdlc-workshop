@@ -79,8 +79,8 @@
     };
 
     // ─── LANE SETUP ──────────────────────────────────────
-    // Row 0 = finish, Row 10 = start (safe), Row 5 = mid safe zone
-    // All other rows = traffic lanes
+    // Row 0 = finish, Row 10 = start (safe), Rows 1-9 = traffic or safe
+    // Layout: finish | 4 traffic | safe | 4 traffic | start
     function initLanes() {
       game.lanes = [];
       for (let r = 0; r < ROWS; r++) {
@@ -96,7 +96,7 @@
           const vehicleCount = 2 + Math.floor(Math.random() * 2);
           const vehicles = [];
           for (let v = 0; v < vehicleCount; v++) {
-            const width = 1.2 + Math.random() * 1.0; // width in cells
+            const width = 1.2 + Math.random() * 1.0; // in cells
             vehicles.push({
               x: v * (COLS / vehicleCount) + Math.random() * 1.5,
               width: width,
@@ -133,10 +133,10 @@
       if (now - game.lastMove < 120) return; // throttle movement
 
       let moved = false;
-      if (keys['ArrowUp'] && game.moto.row > 0)             { game.moto.row--; moved = true; }
-      else if (keys['ArrowDown'] && game.moto.row < ROWS - 1) { game.moto.row++; moved = true; }
-      else if (keys['ArrowLeft'] && game.moto.col > 0)        { game.moto.col--; moved = true; }
-      else if (keys['ArrowRight'] && game.moto.col < COLS - 1){ game.moto.col++; moved = true; }
+      if (keys['ArrowUp']    && game.moto.row > 0)        { game.moto.row--; moved = true; }
+      else if (keys['ArrowDown']  && game.moto.row < ROWS - 1) { game.moto.row++; moved = true; }
+      else if (keys['ArrowLeft']  && game.moto.col > 0)        { game.moto.col--; moved = true; }
+      else if (keys['ArrowRight'] && game.moto.col < COLS - 1) { game.moto.col++; moved = true; }
 
       if (moved) game.lastMove = now;
     }
@@ -169,6 +169,7 @@
             game.lives--;
             if (game.lives <= 0) {
               game.gameOver = true;
+              // Update high score
               if (game.score > game.highScore) {
                 game.highScore = game.score;
                 localStorage.setItem('motofrogger_highscore', game.highScore);
@@ -184,6 +185,7 @@
       // Reached finish
       if (game.moto.row === 0) {
         game.score++;
+        // Update high score on each crossing
         if (game.score > game.highScore) {
           game.highScore = game.score;
           localStorage.setItem('motofrogger_highscore', game.highScore);
@@ -218,7 +220,7 @@
           ctx.fillRect(0, y, canvas.width, CELL);
           // Checkered flag pattern
           for (let c = 0; c < COLS; c++) {
-            if (c % 2 === 0) {
+            if ((c) % 2 === 0) {
               ctx.fillStyle = COLORS.finish_flag;
               ctx.fillRect(c * CELL, y, CELL / 2, CELL / 2);
               ctx.fillRect(c * CELL + CELL / 2, y + CELL / 2, CELL / 2, CELL / 2);
@@ -295,34 +297,34 @@
     function drawHUD() {
       const pad = 12;
 
-      // Semi-transparent bar at the top of the canvas
+      // Semi-transparent bar at the very top of the canvas
       ctx.fillStyle = 'rgba(0, 0, 0, 0.55)';
       ctx.fillRect(0, 0, canvas.width, 32);
 
       ctx.font = 'bold 14px "Courier New", monospace';
 
-      // Score (left, yellow)
+      // Score (left)
       ctx.fillStyle = '#ffdd57';
       ctx.textAlign = 'left';
       ctx.fillText('SCORE: ' + game.score, pad, 22);
 
-      // High score (center, blue)
+      // High score (center)
       ctx.fillStyle = '#4fc3f7';
       ctx.textAlign = 'center';
       ctx.fillText('HI: ' + game.highScore, canvas.width / 2, 22);
 
-      // Lives (right, mini motorcycle icons)
+      // Lives (right) — draw little motorcycle icons
       ctx.textAlign = 'right';
       ctx.fillStyle = '#e94560';
-      ctx.fillText('LIVES:', canvas.width - pad - game.lives * 18, 22);
+      const livesText = 'LIVES: ';
+      ctx.fillText(livesText, canvas.width - pad - game.lives * 18, 22);
       for (let i = 0; i < game.lives; i++) {
         const lx = canvas.width - pad - (game.lives - i) * 18 + 6;
-        // Mini motorcycle body
+        // Mini motorcycle icon
         ctx.fillStyle = '#e94560';
         ctx.beginPath();
         ctx.arc(lx, 18, 6, 0, Math.PI * 2);
         ctx.fill();
-        // Mini headlight
         ctx.fillStyle = '#ffdd57';
         ctx.beginPath();
         ctx.arc(lx, 13, 2, 0, Math.PI * 2);
